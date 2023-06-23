@@ -206,9 +206,6 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h"*/
 #define LV_ASSERT_HANDLER                                                      \
   LV_LOG_INFO("test");
 
-//  while (1)                                                                    \
-//    ; /*Halt by default*/
-
 /*-------------
  * Others
  *-----------*/
