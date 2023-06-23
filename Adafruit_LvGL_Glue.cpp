@@ -29,7 +29,7 @@ static void timerCallback0(void) { lv_tick_inc(lv_tick_interval_ms); }
 
 #elif defined(ESP32) // ------------------------------------------------
 
-static const char *TAG = "lvgl_gui";
+//static const char *TAG = "lvgl_gui";
 
 // Semaphore to handle concurrent calls to LVGL
 // If you wish to call *any* lvgl function from other threads/tasks
@@ -471,12 +471,15 @@ LvGLStatus Adafruit_LvGL_Glue::begin(Adafruit_SPITFT *tft, void *touch,
 
 #elif defined(ESP32) // ------------------------------------------------
 
-    esp_err_t ret;
+    // esp_err_t ret;
 
     /* Create a periodic timer interrupt to call lv_tick_inc */
     const esp_timer_create_args_t periodic_timer_args = {
         .callback = &lv_tick_handler,
-        .name = "periodic_gui"
+        .arg = NULL,
+        .dispatch_method = ESP_TIMER_TASK,
+        .name = "periodic_gui",
+        .skip_unhandled_events = true
     };
     esp_timer_handle_t periodic_timer;
     ESP_ERROR_CHECK(esp_timer_create(&periodic_timer_args, &periodic_timer));
